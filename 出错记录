@@ -1,0 +1,166 @@
+//--------------------------------------------------------------------------------------------
+//分配最大堆，打印错误
+/**
+ *maximum_heap
+ *based on the one-dimensional array
+ *the type of elements using 'int'
+ */
+
+#include"oftenUsedHeader.h"
+
+#define MAXSIZE 10
+#define MAXDATA 10000
+
+typedef struct maxHeap_ *maxHeapPtr;
+struct maxHeap_{
+	int *element;	//point to a array
+	int size;	//the number of current elements
+	int capacity;	//the maximum capacity of heap
+};
+
+maxHeapPtr create(int maxSize){
+	maxHeapPtr m=(maxHeapPtr)malloc(sizeof(maxHeapPtr*));
+	m->size=0;
+	m->capacity=maxSize;
+	m->element=(char*)malloc(sizeof(char)*(maxSize+1));
+	m->element[0]=MAXDATA;
+	return m;
+	/*一开始
+		我传入一个maxHeap m，m为NULL，
+		malloc改变了m的指向，不再指向结构体，而指向堆。
+		并且函数无返回值。在函数外打印m内容时出错
+	*/
+	
+	/*现在在函数内声明一个m，返回m的值，再打印这部分值，运行正常
+		为什么？？
+	*/
+}
+
+void print_struct_maxHeap_(maxHeapPtr h){
+	printf("element[MAXSIZE]:%s\nsize:%d\ncapacity:%d\n",h->element,h->size,h->capacity);
+}
+
+void insert(maxHeapPtr h){
+	return;
+}
+
+#if 0
+int main(void)
+{
+	maxHeapPtr h=NULL;
+	h=create(MAXSIZE);
+	print_struct_maxHeap_(h);
+	
+	return 0;
+}
+#endif
+
+//--------------------------------------------------------------------------------------------
+//测试malloc的用法
+
+#include"oftenUsedHeader.h" 
+
+//测试malloc性质
+//传入指针，函数内调用malloc分配堆的空间，不返回指针。
+//指针在函数外还能正常使用吗？
+
+//错！： 
+//函数里的*h，基本上没有起到指针的效果，malloc把h值改变之后，出函数后h仍然输出2
+//我猜测，其实*h还是一个类似局部变量的东西，将传来的地址存下来，不传回去则在函数结束的之后malloc的地址会丢失 
+
+/*而下面正确的代码使用了指向指针的指针： 
+*将malloc得到的地址赋给hp指向的位置，这个位置也就是外面h指针的所在的位置，这次赋值将外面h指针的值改变了
+*所以之后使用h指针的时候，它所指向的数就是malloc调用的那里的数 
+*/ 
+
+/*
+用图画来描述：addr|data| 
+hp=0，h=1 
+0|1|
+h=1，*h=2
+1|2|
+
+第一段代码：把h表示的地址传进去了，但存这个1的地方变了，即原本是0|1|，现在传入函数中？|1|
+然后malloc改变了？|1|，使它成为？|3|。出函数后h地址为0，h存的内容还是1，而不是3 
+
+第二段代码：把hp传进去，0|1|,malloc之后变成0|3|,出函数之后h地址为0，h存的内容被改为3 
+*/
+#if 0
+void creat(int *h){
+	h=malloc(sizeof(int));
+	h[0]=1;
+}
+
+int main()
+{
+	int *h=2;
+	creat(h);
+	printf("%d",h);
+	return 0;
+}
+#endif
+ 
+#if 0
+//对： 
+void creat(int **hp){
+	*hp=malloc(sizeof(int)*4);
+	(*hp)[0]=1;
+}
+
+int main()
+{
+	int *h;
+	creat(&h);
+	printf("%d",h[0]);
+	return 0;
+}
+#endif 
+
+/*
+再次证明：函数内的h为一个装地址的容器，可以改变*c，不能改变c 
+*/
+#if 0 
+void creat(int *h){
+	*h=22;
+	h=2;  
+}
+
+int main()
+{
+	int p=33;
+	int *c=&p;
+	creat(c);
+	printf("c=%d *c=%d",c,*c);
+	return 0;
+}
+#endif
+
+//--------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------
+
+
+//--------------------------------------------------------------------------------------------
