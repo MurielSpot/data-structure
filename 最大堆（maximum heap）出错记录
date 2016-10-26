@@ -22,7 +22,7 @@ maxHeapPtr create(int maxSize){
 	maxHeapPtr m=(maxHeapPtr)malloc(sizeof(maxHeapPtr*));
 	m->size=0;
 	m->capacity=maxSize;
-	m->element=(int*)malloc(sizeof(char)*(maxSize+1));
+	m->element=(int*)malloc(sizeof(int)*(maxSize+1));
 	m->element[0]=MAXDATA;
 	return m;
 	/*一开始
