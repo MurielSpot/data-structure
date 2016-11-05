@@ -1,0 +1,150 @@
+/**
+ *abstract data type(ADT) description
+
+ *type-name:
+	maximum_heap、最大堆、大顶堆
+ *data object set:
+	完全二叉树,每个结点的元素值不小于其子结点的元素值
+ *operation set:
+	maxHeapPtr create(int maxSize);	创建一个空的最大堆。
+	int IsEmpty(maxHeapPtr h);		判断最大堆H是空。
+	int IsFull(maxHeapPtr h);		判断最大堆H是否已满。
+	void Insert(maxHeapPtr h,int data);	将元素item插入最大堆H。
+	int deleteMaxElement(maxHeapPtr h);	返回H中最大元素(高优先级)。
+ *comments：
+	based on the one-dimensional array；
+	the type of elements using 'int'
+	the total capacity equals MAXSIZE,the first position is a sentry/guard.
+ */
+
+//#include"oftenUsedHeader.h"
+#include<stdio.h>
+#include<stdlib.h> 
+#include<windows.h>
+
+#define PRINTIT 1
+
+#define MAXSIZE 100
+#define MAXDATA 10000
+
+typedef struct maxHeap_ *maxHeapPtr;
+struct maxHeap_{
+	int *element;	//point to a array
+	int size;	//the number of current elements
+	int capacity;	//the maximum capacity of heap
+};
+
+void print_struct_maxHeap_(maxHeapPtr h);	//线性方式打印结构体。
+maxHeapPtr Create(int maxSize);
+int IsEmpty(maxHeapPtr h);
+int IsFull(maxHeapPtr h);
+void Insert(maxHeapPtr h,int data);
+int deleteMaxElement(maxHeapPtr h);
+
+#if 1
+int main(void)
+{
+	int i=0,max;
+	maxHeapPtr h=NULL;
+	h=Create(MAXSIZE);
+	while(i<10){
+		i++;
+		Insert(h,i*3);
+	}
+	print_struct_maxHeap_(h);
+	
+	i++;i++;
+	while(i--){
+		max=deleteMaxElement(h);
+		printf("max=%d",max);
+		print_struct_maxHeap_(h);
+	}
+	return 0;
+}
+#endif
+
+int deleteMaxElement(maxHeapPtr h){
+	int i=1,MaxElement,temp;
+	
+	if(IsEmpty(h)){
+		return h->element[0];
+	}
+	MaxElement=h->element[1];
+	temp=h->element[h->size];
+	h->size--;
+	while((i*=2)<=h->size){
+		if(i!=h->size && h->element[i] < h->element[i+1]){
+			i++;
+		}
+		if(h->element[i]>temp){
+			h->element[i/2]=h->element[i];
+		}else{
+			break;
+		}
+	}
+	h->element[i/2]=temp;
+	
+	return MaxElement;
+}
+
+void Insert(maxHeapPtr h,int data){
+	int size;
+	if(IsFull(h)){
+		return;
+	}
+	size=++(h->size);
+	h->element[size]=data;
+	while(data > h->element[size/2]){
+		h->element[size] = h->element[size/2];
+		size /= 2;
+	}
+	h->element[size]=data;
+	return;
+}
+
+int IsFull(maxHeapPtr h){
+#if PRINTIT
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_RED);
+#endif
+	if(h->size>=h->capacity){
+#if PRINTIT
+		puts("\nfull!\n");
+#endif
+		return 1;
+	}
+#if PRINTIT
+	puts("\nnot-full!\n");
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_RED|FOREGROUND_GREEN);
+#endif
+	return 0;
+}
+
+/*之后可以试试用宏来实现*/
+int IsEmpty(maxHeapPtr h){
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_GREEN);
+	if(h->size){
+		puts("\nmaxheap not-empty!\n");
+		return 0;
+	}
+	puts("\nmaxheap empty!\n");
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE),FOREGROUND_BLUE|FOREGROUND_RED|FOREGROUND_GREEN);
+	return 1;
+}
+
+maxHeapPtr Create(int maxSize){
+	maxHeapPtr m=(maxHeapPtr)malloc(sizeof(maxHeapPtr*));
+	m->size=0;
+	m->capacity=maxSize;
+	m->element=(int*)malloc(sizeof(int)*(maxSize+1));
+	m->element[0]=MAXDATA;
+	return m;
+}
+
+void print_struct_maxHeap_(maxHeapPtr h){
+	int i;
+	printf("element[MAXSIZE]:");
+	for(i=0;i<=h->size;i++){
+		printf("%d  ",h->element[i]);
+	}	
+	printf("\nsize:%d\ncapacity:%d\n",h->size,h->capacity);
+}
