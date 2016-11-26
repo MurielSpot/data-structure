@@ -1,0 +1,73 @@
+typedef struct B_tree{
+	int data;
+	struct B_tree *right;
+	struct B_tree *left;
+}*b_tree_p;
+
+/**
+ *功能：创建一个完全二叉树链表
+ *注意事项：传入的是根节点，根节点所指内存空间在函数外已分配
+ */
+void creat_binary_tree(b_tree_p head){
+	char flag;
+	
+	head->right=NULL;
+	head->left=NULL;
+	
+	puts("put A letter,y means going on");
+	flag=getchar();
+	fflush(stdin);//及时在输入字符之后清屏，可以避免使用循环时出现难以理解的自动进入的循环
+	
+	if(flag=='y'){//这个地方是if，不用while！！
+		head->right=(b_tree_p)malloc(sizeof(struct B_tree));
+		if(head->right){
+			head->right->data=head->data*2;
+			printf("%d has established!\n",head->right->data);
+			creat_binary_tree(head->right);	
+		}else{
+			exit(1);
+		}
+		
+		head->left=(b_tree_p)malloc(sizeof(struct B_tree));
+		if(head->left){
+			(head->left)->data=head->data*2+1;
+			printf("%d has established!\n",head->left->data);
+			creat_binary_tree(head->left);
+		}else{
+			exit(1);
+		}
+	}
+	return ;
+}
+
+/**
+ *功能：遍历完全二叉树
+ *此处是递归遍历，另外还有使用堆栈的非递归遍历的写法 
+ *我的写法，下面使用的是老师的写法，好像更简洁一些，判断次数好像相同：
+ *	void traversal_b_t(b_tree_p head){
+		printf("\nthis node is %d-th\n",head->data);
+		if(head->right){
+			traversal_b_t(head->right);	
+		}
+		if(head->left){
+			traversal_b_t(head->left);	
+		}
+	}
+ */
+void traversal_b_t(b_tree_p head){
+	if(head){
+		printf("\nthis node is %d-th\n",head->data);
+		traversal_b_t(head->right);	
+		traversal_b_t(head->left);	
+	}
+}
+
+void traversal_b_t2(b_tree_p head){
+	printf("\nthis node is %d-th\n",head->data);
+	if(head->right){
+		traversal_b_t(head->right);	
+	}
+	if(head->left){
+		traversal_b_t(head->left);	
+	}
+}
