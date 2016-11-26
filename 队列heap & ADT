@@ -1,0 +1,12 @@
+/*
+ 类型名称 ：队列(Queue)
+ 
+ 数据对象集： 一个有0 个或多个元素的有穷线性表。
+ 
+ 操作集 ：长度为MaxSize 的队列Q   Queue ，队列元素item   ElementType
+    1 、Queue CreatQueue( int MaxSize ) ：生成长度为MaxSize 的空队列；
+    2 、int IsFullQ( Queue Q, int MaxSize ) ：判断队列Q 是否已满；
+    3 、void AddQ( Queue Q, ElementType item ) ：  将数据元素item 插入队列Q 中；
+    4 、int IsEmptyQ( Queue Q ) ：  判断队列Q 是否为空；
+    5 、ElementType DeleteQ( Queue Q ) ：将队头数据元素从队列中删除并返回。
+ */
