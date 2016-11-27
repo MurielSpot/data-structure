@@ -5,6 +5,29 @@ typedef struct B_tree{
 }*b_tree_p;
 
 /**
+ *功能：创建一个二叉树
+ */
+BTNodePtr createBT(){
+	char c;
+	
+	BTNodePtr temp;
+	
+	puts("create node or not(y or n):");
+	scanf("%c",&c);
+	if(c=='n'){
+		temp=NULL;
+	}else{
+		temp=(BTNodePtr)malloc(sizeof(BTNode));
+		puts("input data:");
+		scanf("%d",temp->data);
+		temp->left=createBT();
+		temp->right=createBT();
+	}
+	
+	return temp;
+}
+
+/**
  *功能：创建一个完全二叉树链表
  *注意事项：传入的是根节点，根节点所指内存空间在函数外已分配
  */
