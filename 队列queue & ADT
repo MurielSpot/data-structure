@@ -12,7 +12,7 @@
     6 、void printQ(Queue *q)：打印队列
  */
 
-#define USE 1
+#define PRINT_HELP_TO_DEBUG 1
 #define infiniteElem 10000
 
 #include<stdio.h>
@@ -93,14 +93,12 @@ Queue* CreateQueue(int MaxSize){
 	q->elemNum=0;
 	q->capacity=MaxSize;
 	
-#if USE
+#if PRINT_HELP_TO_DEBUG
 	printf("q->first=%d,q->last=%d,q->elemNum=%d,q->capacity=%d\n",
 			q->first,q->last,q->elemNum,q->capacity);
 #endif
 
-#if USE
-    puts("\n--------CreateQueue end!--------\n");
-#endif
+	puts("\n--------CreateQueue end!--------\n");
 	return q;
 }//CreateQueue
 
@@ -121,26 +119,21 @@ void EnQueue(int x,Queue *q){
 		q->last=temp;
 	}else{
 		(q->last)->next=temp;
-#if 0
-	printf("q->last->next指向temp，q->last没有指向temp时，q->last->next=%d",
-			q->last->next);	//这一步确认队列结点之间是相互连接的 
-#endif
 		q->last=temp;
 	}
 	
-#if USE
+#if PRINT_HELP_TO_DEBUG
 	printf("temp=%d,temp->data=%d,temp->next=%d\n",
 			temp,temp->data,temp->next);
 #endif
 
-#if USE
+#if PRINT_HELP_TO_DEBUG
 	printf("q->first=%d,q->last=%d,q->elemNum=%d,q->capacity=%d\n",
 			q->first,q->last,q->elemNum,q->capacity);
 #endif
 
-#if USE
-    puts("\n--------EnQueue end!--------\n");
-#endif
+	puts("\n--------EnQueue end!--------\n");
+
 }//EnQueue
 
 int DeQueue(Queue* q){//有错误 
@@ -154,8 +147,8 @@ int DeQueue(Queue* q){//有错误
 	temp=q->first;
 	elem=temp->data;
 	
-#if USE
-printf("temp=q->first=%d,elem=%d\n",temp,elem);
+#if PRINT_HELP_TO_DEBUG
+	printf("temp=q->first=%d,elem=%d\n",temp,elem);
 #endif	
 
 	if(q->first==q->last){
@@ -165,15 +158,13 @@ printf("temp=q->first=%d,elem=%d\n",temp,elem);
 	}
 	q->elemNum--;
 	
-#if USE
+#if PRINT_HELP_TO_DEBUG
 printf("temp=%d,指向next后的q->first=%d,elem=%d\n",temp,q->first);
 #endif
 
 	free(temp);
 
-#if USE
-    puts("\n--------DeQueue end!--------\n");
-#endif
+	puts("\n--------DeQueue end!--------\n");
 
 	return elem;
 }//DeQueue
@@ -193,6 +184,4 @@ int IsEmptyQ(Queue* q){
 	puts("queue is empty !!\n");
 	return 1; 
 }//IsEmptyQ
-
-
 
