@@ -3,10 +3,10 @@
  *.cpp里会#include .h，#include是井号开头的，是编译预处理指令。
  *#include is to insert the included file into the .cpp file at where the #include statement is.
  
- *c++里声明包含：1、extern variables 2、function prototypes 3、class/struct declaration
+ *c++里声明包含：1、extern variables. 2、function prototypes. 3、class/struct declaration.
  
- *
- 
- 
+ *Tips：1、One class declaration per header file.
+        2、Associated with one source file in the same prefix of file name.
+        3、The contents of a header file is surrounded with #ifndef #define #endif.
  
  */
