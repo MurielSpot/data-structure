@@ -12,6 +12,7 @@
     6 、void printQ(Queue *q)：打印队列
  */
 
+//以下是队列的链式实现
 #define PRINT_HELP_TO_DEBUG 1
 #define infiniteElem 10000
 
