@@ -1,0 +1,12 @@
+/*
+ *对于c++,声明（declarations）（对应.h）与定义（definitions）（对应.cpp）应该成对出现。
+ *.cpp里会#include .h，#include是井号开头的，是编译预处理指令。
+ *#include is to insert the included file into the .cpp file at where the #include statement is.
+ 
+ *c++里声明包含：1、extern variables 2、function prototypes 3、class/struct declaration
+ 
+ *
+ 
+ 
+ 
+ */
