@@ -15,7 +15,8 @@
 #include<stdio.h>
 #include<stdlib.h>
 
-#define PRINT_HELP_TO_DEBUG 1
+#define PRINT_HELP_TO_DEBUG 0
+#define FUNCTION_END_PROMPT 0
 #define MAIN 0
 
 #if MAIN
@@ -64,7 +65,9 @@ void printQ(Queue *q){
 		printf("%d ",temp->data);
 		temp=temp->next;
 	}
+#if FUNCTION_END_PROMPT
 	printf("\n-----print end-----\n\n");
+#endif
 }//printQ
 
 Queue* CreateQueue(int MaxSize){
@@ -78,9 +81,10 @@ Queue* CreateQueue(int MaxSize){
 	printf("q->first=%d,q->last=%d,q->elemNum=%d,q->capacity=%d\n",
 			q->first,q->last,q->elemNum,q->capacity);
 #endif
-
+#if FUNCTION_END_PROMPT
 	puts("\n--------CreateQueue end!--------\n");
 	return q;
+#endif
 }//CreateQueue
 
 void EnQueue(int x,Queue *q){
@@ -112,9 +116,9 @@ void EnQueue(int x,Queue *q){
 	printf("q->first=%d,q->last=%d,q->elemNum=%d,q->capacity=%d\n",
 			q->first,q->last,q->elemNum,q->capacity);
 #endif
-
+#if FUNCTION_END_PROMPT
 	puts("\n--------EnQueue end!--------\n");
-
+#endif
 }//EnQueue
 
 int DeQueue(Queue* q){//有错误 
@@ -144,9 +148,9 @@ printf("temp=%d,指向next后的q->first=%d,elem=%d\n",temp,q->first);
 #endif
 
 	free(temp);
-
+#if FUNCTION_END_PROMPT
 	puts("\n--------DeQueue end!--------\n");
-
+#endif
 	return elem;
 }//DeQueue
 
