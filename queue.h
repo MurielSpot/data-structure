@@ -1,4 +1,4 @@
- /*
+/*
  * queue.h
  *
  * Created on: 2016-12-7
@@ -7,7 +7,6 @@
 
 #ifndef QUEUE_H_
 #define QUEUE_H_
-
 
 #define infiniteElem 10000
  
