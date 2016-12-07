@@ -1,7 +1,7 @@
 # data-structure
 
 linear list；
-leap；
+heap；
 stack；
 binary tree；
 Huffman tree；
