@@ -1,0 +1,18 @@
+/*
+  二叉搜索树（BST,Binary Search Tree）/二叉排序树/二叉查找树
+  
+  二叉搜索树：一棵二叉树，可以为空；如果不为空，满足以下性质：
+    1.  非空 左子树 的所有 键值小于其根结点 的键值。
+    2.  非空 右子树 的所有 键值大于其根结点 的键值。
+    3.  左、右子树都是二叉搜索树 
+  
+  静态查找
+  动态查找
+  
+  二叉搜索树操作的特别函数：
+    Position Find( ElementType X, BinTree BST ) ：从二叉搜索树BST中查找元素X ，返回其所在结点的地址；
+    Position FindMin( BinTree BST ) ：从二叉搜索树BST 中查找并返回最小元素所在结点的地址；
+    Position FindMax( BinTree BST )  ：从二叉搜索树BST 中查找并返回最大元素所在结点的地址。
+    BinTree Insert( ElementType X, BinTree BST )
+    BinTree Delete( ElementType X, BinTree BST )
+ */
